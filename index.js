@@ -11,12 +11,35 @@ window.addEventListener("load", () => {
     "#60c2d3"
   ];
 
+var count=0,k=0;
   pads.forEach((pad, index) => {
     pad.addEventListener("click", function() {
+      console.log(index);
+      count++;
+      if(count===1){
       sounds[index].currentTime = 0;
       sounds[index].play();
       createBubble(index);
+      k=index;
+    }
+    else{
+      if(k===index){
+       sounds[index].currentTime = 0;
+      sounds[index].play();
+
+      createBubble(index);
+      }
+      else{
+        sounds[k].pause();
+        sounds[index].play();
+         createBubble(index);
+         k=index;
+      }
+
+    }
+
     });
+
   });
 
   const createBubble = index => {
